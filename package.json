@@ -1,6 +1,7 @@
 {
   "name": "ecommerce",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "mocha '__tests__/*.js' --reporter mochawesome --recursive  --timeout 6000 --exit",
