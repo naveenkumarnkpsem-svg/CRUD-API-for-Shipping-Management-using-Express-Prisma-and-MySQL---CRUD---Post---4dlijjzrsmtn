@@ -1,10 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
 
+import shippingRoutes from "./src/routes/shippingRoutes.js";
+
+
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+app.use('/shipping', shippingRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
