@@ -1,6 +1,6 @@
 import express from "express";
-import {createShipping,cancelShipping,getShippings} from "../controllers/shippingController";
-import {verifySecret}   from "../middleware/authMiddleware";
+import {createShipping,cancelShipping,getShippings} from "../controllers/shippingController.js";
+import {verifySecret}   from "../middleware/authMiddleware.js";
 
 const router = express.Router()
 

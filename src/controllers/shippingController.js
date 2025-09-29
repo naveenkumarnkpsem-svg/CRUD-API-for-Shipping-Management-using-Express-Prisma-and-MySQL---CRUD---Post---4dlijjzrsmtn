@@ -1,4 +1,4 @@
-const {prisma} = require("../../db/config");
+import {prisma} from "../../db/config.js";
 
 
 const createShipping = async (req,res)=>{
@@ -94,4 +94,4 @@ const getShippings = async (req,res)=>{
 }
 
 
-module.exports={createShipping,cancelShipping,getShippings};
+export {createShipping,cancelShipping,getShippings};

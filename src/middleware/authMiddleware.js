@@ -1,4 +1,5 @@
-require("dontenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 
 
@@ -24,4 +25,4 @@ const verifySecret = (req,res,next)=>{
 
 }
 
-module.exports = {verifySecret};
+export {verifySecret};
