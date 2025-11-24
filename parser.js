@@ -18,4 +18,6 @@ const authenticateAPIKey = (req, res, next) => {
   next();
 };
 
-module.exports = { authenticateAPIKey };
+// Export the middleware as both the default export (function) and a named property
+module.exports = authenticateAPIKey;
+module.exports.authenticateAPIKey = authenticateAPIKey;
