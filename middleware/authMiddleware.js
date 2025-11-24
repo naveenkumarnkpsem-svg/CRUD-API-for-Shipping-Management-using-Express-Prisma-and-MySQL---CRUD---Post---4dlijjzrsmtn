@@ -1,4 +1,4 @@
-const { SHIPPING_SECRET_KEY } = require('./authkey');
+const SHIPPING_SECRET_KEY = "your_secret_api_key_here";
 
 const authenticateAPIKey = (req, res, next) => {
   const authKey = req.headers['shipping_secret_key'] || req.headers['SHIPPING_SECRET_KEY'] || req.headers['apiauthkey'];
@@ -18,6 +18,4 @@ const authenticateAPIKey = (req, res, next) => {
   next();
 };
 
-// Export the middleware as both the default export (function) and a named property
-module.exports = authenticateAPIKey;
-module.exports.authenticateAPIKey = authenticateAPIKey;
+module.exports = { authenticateAPIKey };
