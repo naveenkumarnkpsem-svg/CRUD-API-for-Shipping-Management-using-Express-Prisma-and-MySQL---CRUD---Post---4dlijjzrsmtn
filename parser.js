@@ -1,7 +1,7 @@
 const { SHIPPING_SECRET_KEY } = require('./middleware/authkey');
 
 const authenticateAPIKey = (req, res, next) => {
-  const authKey = req.headers['shipping_secret_key'];
+  const authKey = req.headers['shipping_secret_key'] || req.headers['SHIPPING_SECRET_KEY'] || req.headers['apiauthkey'];
 
   if (!authKey) {
     return res.status(403).json({
