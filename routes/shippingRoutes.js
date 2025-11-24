@@ -1,16 +1,16 @@
 const express = require('express');
 const { prisma } = require('../db/config');
-const { authMiddleware } = require('../middleware/authMiddleware');
+const { authenticateAPIKey } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
 // Create a new shipping record
-router.post('/create', authMiddleware, async (req, res) => {
+router.post('/create', authenticateAPIKey, async (req, res) => {
   try {
     const { userId, productId, count } = req.body;
 
     if (!userId || !productId || !count) {
-      return res.status(400).json({ message: 'userId, productId, and count are required' });
+      return res.status(404).json({ message: 'userId, productId, and count are required' });
     }
 
     const shipping = await prisma.shipping.create({
@@ -28,12 +28,12 @@ router.post('/create', authMiddleware, async (req, res) => {
 });
 
 // Cancel a shipping record
-router.put('/cancel', authMiddleware, async (req, res) => {
+router.put('/cancel', authenticateAPIKey, async (req, res) => {
   try {
     const { shippingId } = req.body;
 
     if (!shippingId) {
-      return res.status(400).json({ message: 'shippingId is required' });
+      return res.status(404).json({ message: 'shippingId is required' });
     }
 
     const shipping = await prisma.shipping.update({
@@ -51,7 +51,7 @@ router.put('/cancel', authMiddleware, async (req, res) => {
 });
 
 // Get all shipping records or filter by userId
-router.get('/get', authMiddleware, async (req, res) => {
+router.get('/get', authenticateAPIKey, async (req, res) => {
   try {
     const { userId } = req.query;
     let where = {};

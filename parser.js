@@ -1,4 +1,4 @@
-const { SHIPPING_SECRET_KEY } = require('./authkey');
+const { SHIPPING_SECRET_KEY } = require('./middleware/authkey');
 
 const authenticateAPIKey = (req, res, next) => {
   const authKey = req.headers['shipping_secret_key'];

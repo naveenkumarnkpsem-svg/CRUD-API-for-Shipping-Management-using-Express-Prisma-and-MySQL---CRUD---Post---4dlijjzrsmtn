@@ -51,7 +51,7 @@ describe('Shipping Management API', () => {
       .send({ userId: 1, productId: 2, count: 3 })
       .end((err, res) => {
         expect(res).to.have.status(403);
-        expect(res.body.message).to.equal('SHIPPING_SECRET_KEY header is missing');
+        expect(res.body.error).to.equal('SHIPPING_SECRET_KEY header is missing');
         done();
       });
   });
@@ -64,7 +64,7 @@ describe('Shipping Management API', () => {
       .send({ userId: 1, productId: 2, count: 3 })
       .end((err, res) => {
         expect(res).to.have.status(403);
-        expect(res.body.message).to.equal('Invalid SHIPPING_SECRET_KEY');
+        expect(res.body.error).to.equal('Invalid SHIPPING_SECRET_KEY');
         done();
       });
   });
@@ -76,7 +76,7 @@ describe('Shipping Management API', () => {
       .set('shipping_secret_key', authKey)
       .send({})
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equal('userId, productId, and count are required');
         done();
       });
@@ -89,7 +89,7 @@ describe('Shipping Management API', () => {
       .set('shipping_secret_key', authKey)
       .send({ productId: 2, count: 3 })
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equal('userId, productId, and count are required');
         done();
       });
@@ -102,7 +102,7 @@ describe('Shipping Management API', () => {
       .set('shipping_secret_key', authKey)
       .send({ userId: 1, count: 3 })
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equal('userId, productId, and count are required');
         done();
       });
@@ -115,7 +115,7 @@ describe('Shipping Management API', () => {
       .set('shipping_secret_key', authKey)
       .send({ userId: 1, productId: 2 })
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equal('userId, productId, and count are required');
         done();
       });
@@ -174,7 +174,7 @@ describe('Shipping Management API', () => {
       .set('shipping_secret_key', authKey)
       .send({})
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equal('shippingId is required');
         done();
       });
@@ -233,7 +233,7 @@ describe('Shipping Management API', () => {
       .get('/api/shipping/get')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        expect(res.body.message).to.equal('SHIPPING_SECRET_KEY header is missing');
+        expect(res.body.error).to.equal('SHIPPING_SECRET_KEY header is missing');
         done();
       });
   });
@@ -245,7 +245,7 @@ describe('Shipping Management API', () => {
       .set('shipping_secret_key', 'invalid')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        expect(res.body.message).to.equal('Invalid SHIPPING_SECRET_KEY');
+        expect(res.body.error).to.equal('Invalid SHIPPING_SECRET_KEY');
         done();
       });
   });
